@@ -1,6 +1,5 @@
 # Incident Management System (IMS)
 
-**Zeotap Infrastructure / SRE Intern Assignment**
 
 A resilient, production-grade Incident Management System that monitors a distributed stack (APIs, MCP Hosts, Caches, Queues, RDBMS, NoSQL) and manages failure mediation workflows end-to-end.
 
