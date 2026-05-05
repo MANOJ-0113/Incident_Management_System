@@ -71,14 +71,20 @@ async def submit_rca(session: AsyncSession, work_item_id: str, rca_data: RCACrea
     if existing:
         raise ValueError("RCA already submitted for this work item")
 
+    # 🔥 ADD THESE TWO LINES (THIS IS YOUR FIX)
+    incident_start = rca_data.incident_start.replace(tzinfo=None)
+    incident_end = rca_data.incident_end.replace(tzinfo=None)
+
+    # use fixed values
     rca = RCA(
         work_item_id=work_item_id,
-        incident_start=rca_data.incident_start,
-        incident_end=rca_data.incident_end,
+        incident_start=incident_start,
+        incident_end=incident_end,
         root_cause_category=rca_data.root_cause_category,
         fix_applied=rca_data.fix_applied,
         prevention_steps=rca_data.prevention_steps,
     )
+
     session.add(rca)
     await session.commit()
     await session.refresh(rca)
